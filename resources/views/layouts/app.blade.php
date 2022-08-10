@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>    {{--<link rel="stylesheet" href="{{ asset('css/app.css') }}">--}}
 </head>
 <body class="bg-gray-100">
+    @include('layouts.navbar')
     @yield('content')
 </body>
 </html>
