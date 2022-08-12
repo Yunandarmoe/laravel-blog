@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +14,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        //dd(auth()->user()->posts);
-        return view('dashboard');
+        return view('posts.index');
     }
 
     /**
@@ -35,7 +35,13 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'body' => 'required'
+        ]);
+
+        $request->user()->posts()->create($request->only('body'));
+
+        return back();
     }
 
     /**
