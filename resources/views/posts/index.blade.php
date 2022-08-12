@@ -3,7 +3,7 @@
 @section('content')
     <div class="flex justify-center mt-5">
         <div class="w-5/12 bg-white p-6 rounded-lg">
-            <form action="{{ route('posts') }}" method="POST">
+            <form action="{{ route('posts') }}" method="POST" class="mb-4">
                 @csrf
                 <div class="mb-4">
                     <label for="body" class="sr-only">Body</label>
@@ -11,7 +11,7 @@
                     @enderror" placeholder="Enter your post"></textarea>
                 </div>
                 @error('body')
-                    <div class="text-red-500 mt-2 text-sm">
+                    <div class="text-red-500 mt-2 text-sm mb-2">
                         {{ $message }}
                     </div>
                 @enderror
@@ -22,6 +22,17 @@
                     </button>
                 </div>
             </form>
+
+            @if($posts->count())
+                @foreach ($posts as $post)
+                    <div class="mb-4">
+                        <a href="" class="font-bold">{{ $post->user->name }}<span class="text-gray-600 text-sm ml-2">{{ $post->created_at->diffForHumans() }}</span></a>
+                        <p class="mb-2">{{ $post->body }}</p>
+                    </div>
+                @endforeach
+            @else
+                <p>No Post</p>
+            @endif
         </div>
     </div>
 @endsection
