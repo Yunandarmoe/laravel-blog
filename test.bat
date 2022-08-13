@@ -1,0 +1,1 @@
+D: && cd D:\Learning\SamplePrj\laravel-blog && php artisan schedule:run > "NUL" 2>&1
