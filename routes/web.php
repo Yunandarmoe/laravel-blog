@@ -2,12 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\UserPostController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 
 // Home
 Route::get('/', function () {
@@ -42,3 +43,9 @@ Route::get('/user/{user:name}/posts', [UserPostController::class, 'index'])->nam
 // Post  
 Route::get('/posts', [PostController::class, 'index'])->name('posts');
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+
+// Forgot Password
+Route::get('/forgetpassword', [ForgotPasswordController::class, 'index'])->name('forgotpassword.index');
+Route::post('/forgetpassword', [ForgotPasswordController::class, 'store'])->name('forgotpassword.store');
+Route::get('/resetpassword/{token}', [ForgotPasswordController::class, 'show'])->name('resetpassword.show');
+Route::post('/resetpassword', [ForgotPasswordController::class, 'update'])->name('resetpassword.update');
