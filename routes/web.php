@@ -1,12 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\UserPostController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 
@@ -23,6 +25,8 @@ Route::middleware('auth')->group(function () {
     // Post  
     Route::post('/posts', [PostController::class, 'store']);
     Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+    // About
+    Route::get('about', [PageController::class, 'about']);
 });
 
 // Guest Middleware
@@ -49,3 +53,8 @@ Route::get('/forgetpassword', [ForgotPasswordController::class, 'index'])->name(
 Route::post('/forgetpassword', [ForgotPasswordController::class, 'store'])->name('forgotpassword.store');
 Route::get('/resetpassword/{token}', [ForgotPasswordController::class, 'show'])->name('resetpassword.show');
 Route::post('/resetpassword', [ForgotPasswordController::class, 'update'])->name('resetpassword.update');
+
+// Localization
+Route::middleware('lang')->group(function() {
+    Route::get('lang/{lang}', [LocalizationController::class, 'index']);
+});

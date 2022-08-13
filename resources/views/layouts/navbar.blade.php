@@ -9,6 +9,22 @@
         <li>
             <a href="{{ route('posts') }}" class="p-3">Post</a>
         </li>
+        <li>
+            <a href="/about" class="p-3">@lang('nav.About')</a>
+        </li>    
+        <li class="dropdown pl-3">
+            <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                {{ __('Language') }}
+            </button>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="/lang/my" class="p-3 dropdown-item">{{ Lang::get('Myanmar') }}</a>
+                </li>
+                <li>
+                    <a href="/lang/en" class="p-3 dropdown-item">@lang('English')</a>
+                </li>
+            </ul>
+        </li>
     </ul>
     <ul class="flex items-center">
         @auth
