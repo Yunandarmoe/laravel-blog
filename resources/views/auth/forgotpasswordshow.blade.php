@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Forgot Password')
+
 @section('content')
     <div class="flex justify-center mt-5">
         <div class="w-4/12 bg-white p-6 rounded-lg">

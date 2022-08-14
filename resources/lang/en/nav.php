@@ -1,8 +1,8 @@
 <?php
 
 return [
-    //"Page" => [
-    //    "Home" => "Home"
-    //],
+    "Page" => [
+        "Home" => "Home"
+    ],
     "About" => "About"
 ]; 

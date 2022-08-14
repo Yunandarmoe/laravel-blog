@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'User Post')
+
 @section('content')
     <div class="flex justify-center mt-5">
         <div class="w-8/12">

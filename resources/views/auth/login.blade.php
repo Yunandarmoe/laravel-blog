@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Login')
+
 @section('content')
     <div class="flex justify-center mt-5">
         <div class="w-4/12 bg-white p-6 rounded-lg">
@@ -28,17 +30,19 @@
                         </div>
                     @enderror
                 </div>
-                <div class="mb-4">
-                    <div class="flex items-center">
-                        <input type="checkbox" name="remember" id="remember" class="mr-2">
-                        <label for="remember">Remember me</label>
+                <div class="flex justify-content-between">
+                    <div class="mb-4">
+                        <div class="flex items-center">
+                            <input type="checkbox" name="remember" id="remember" class="mr-2">
+                            <label for="remember">Remember me</label>
+                        </div>
                     </div>
-                </div>
-                <div class="mb-4">
-                    <div class="checkbox">
-                        <label>
-                            <a href="{{ route('forgotpassword.index') }}" class="text-blue-500">Reset Password</a>
-                        </label>
+                    <div class="mb-4">
+                        <div class="checkbox">
+                            <label>
+                                <a href="{{ route('forgotpassword.index') }}" class="text-blue-500">Forgot your password?</a>
+                            </label>
+                        </div>
                     </div>
                 </div>
                 <div>

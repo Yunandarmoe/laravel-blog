@@ -25,8 +25,6 @@ Route::middleware('auth')->group(function () {
     // Post  
     Route::post('/posts', [PostController::class, 'store']);
     Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
-    // About
-    Route::get('about', [PageController::class, 'about']);
 });
 
 // Guest Middleware
@@ -56,5 +54,10 @@ Route::post('/resetpassword', [ForgotPasswordController::class, 'update'])->name
 
 // Localization
 Route::middleware('lang')->group(function() {
+    Route::get('lang/{lang}', [LocalizationController::class, 'index']);
+});
+
+Route::middleware('lang')->group(function() {
+    Route::get('about', [PageController::class, 'about']);
     Route::get('lang/{lang}', [LocalizationController::class, 'index']);
 });

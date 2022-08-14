@@ -17,21 +17,14 @@ class Localization
     public function handle(Request $request, Closure $next)
     {
         $language = ['en', 'my'];
+       
         $lang = $request->query('lang', session('lang', 'en'));
+
         if(in_array($lang, $language)) {
-            session(['lang' => $lang]);
+            session()->put('lang', $lang);
             app()->setLocale($request->query('lang', session('lang', 'en')));
         }
-//        $locale = $request->query('lang');
-//        if ($locale && in_array($locale, config('app.available_locales'))) {
-//            session(['lang' => $locale]);
-//            app()->setLocale($locale);
-//        }
-//
-//        $locale = session('lang');
-//        if ($locale && in_array($locale, config('app.available_locales'))) {
-//            app()->setLocale($locale);
-//        }
+        
         return $next($request);
     }
 }
