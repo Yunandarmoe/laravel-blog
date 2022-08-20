@@ -54,10 +54,7 @@ Route::post('/resetpassword', [ForgotPasswordController::class, 'update'])->name
 
 // Localization
 Route::middleware('lang')->group(function() {
-    Route::get('lang/{lang}', [LocalizationController::class, 'index']);
-});
-
-Route::middleware('lang')->group(function() {
     Route::get('about', [PageController::class, 'about']);
+    Route::get('/posts', [PostController::class, 'index'])->name('posts');
     Route::get('lang/{lang}', [LocalizationController::class, 'index']);
 });

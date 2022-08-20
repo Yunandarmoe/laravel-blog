@@ -25,14 +25,7 @@ class PostStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'body' => ['required', new PostBodyRule()]
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'body.required' => 'The content is required',
+            'body' => ['required', 'max:4', new PostBodyRule()]
         ];
     }
 }

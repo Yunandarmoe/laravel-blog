@@ -36,6 +36,6 @@ class PostBodyRule implements Rule
      */
     public function message()
     {
-        return 'The content must be written in Japanese';
+        return __('The content must be written in Katakana');
     }
 }
