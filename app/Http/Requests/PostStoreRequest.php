@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\PostBodyRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class PostStoreRequest extends FormRequest
@@ -24,7 +25,14 @@ class PostStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'body' => 'required'
+            'body' => ['required', new PostBodyRule()]
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'body.required' => 'The content is required',
         ];
     }
 }
