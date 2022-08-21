@@ -29,6 +29,9 @@
     <ul class="flex items-center">
         @auth
             <li>
+                <img src="{{ asset(Auth::user()->image) }}" alt="" style="height: 50px; width: 50px; border-radius: 50%;">      
+            </li>
+            <li>
                 <a href="" class="p-3">{{ auth()->user()->name }}</a>
             </li> 
             <li>

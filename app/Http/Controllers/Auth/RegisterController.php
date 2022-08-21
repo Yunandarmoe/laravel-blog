@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\RegisterStoreRequest;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\RegisterStoreRequest;
 
 class RegisterController extends Controller
 {
@@ -28,10 +29,18 @@ class RegisterController extends Controller
      */
     public function store(RegisterStoreRequest $request)
     {
+        if(request()->has('image')){
+            $imageuploaded = request()->file('image');
+            $imagename = time() . '_' . $imageuploaded->getClientOriginalName();
+            $imagepath = public_path('/upload/image/');
+            $imageuploaded->move($imagepath, $imagename);
+       }
+
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'image' => '/upload/image/' . $imagename,
         ]);
 
         //auth()->attempt($request->only('email', 'password'));

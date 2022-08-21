@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Like;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,6 +22,7 @@ class User extends Authenticatable
         'name', 
         'email', 
         'password',
+        'image'
     ];
 
     /**
