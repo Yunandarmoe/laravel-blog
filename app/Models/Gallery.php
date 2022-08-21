@@ -5,12 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Image extends Model
+class Gallery extends Model
 {
     use HasFactory;
 
-    public function getImageLinkAttribute()
-    {
-        return asset('upload/' . $this->name);
-    }
+    protected $fillable = [
+        'image',
+    ];
 }

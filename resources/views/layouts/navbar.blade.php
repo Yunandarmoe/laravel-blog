@@ -29,7 +29,11 @@
     <ul class="flex items-center">
         @auth
             <li>
-                <img src="{{ asset(Auth::user()->image) }}" alt="" style="height: 50px; width: 50px; border-radius: 50%;">      
+                @if(Auth::user()->image)
+                    <img src="{{ Auth::user()->getImage() }}" alt="" style="height: 50px; width: 50px; border-radius: 50%; border: 1px solid #fff;">
+                @else
+                    <img src="{{ asset('storage/images') . '/' . 'avatar.jpg' }}" alt="No photo" style="height: 50px; width: 50px; border-radius: 50%; border: 1px solid #fff;">
+                @endif            
             </li>
             <li>
                 <a href="" class="p-3">{{ auth()->user()->name }}</a>

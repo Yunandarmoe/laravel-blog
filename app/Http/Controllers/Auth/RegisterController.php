@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
 use App\Models\Image;
+use App\Models\Gallery;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -18,7 +19,8 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        return view('auth.register');
+        $galleries = Gallery::all();
+        return view('auth.register', compact('galleries'));
     }
 
     /**
@@ -29,22 +31,32 @@ class RegisterController extends Controller
      */
     public function store(RegisterStoreRequest $request)
     {
-        if(request()->has('image')){
-            $imageuploaded = request()->file('image');
+        if ($request->hasFile('image')) {
+            $imageuploaded = $request->file('image');
             $imagename = time() . '_' . $imageuploaded->getClientOriginalName();
-            $imagepath = public_path('/upload/image/');
-            $imageuploaded->move($imagepath, $imagename);
-       }
+            $imagepath = $request->image->storeAs('public/images', $imagename);
 
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'image' => '/upload/image/' . $imagename,
-        ]);
+            $gallery = new Gallery();
+            $gallery->image = $imagename;
+            $gallery->save();
+        }
 
-        //auth()->attempt($request->only('email', 'password'));
-        
+        if ($request->hasFile('image')) {
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'image' => "images/" . $imagename,
+            ]);
+        } else {
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+        }
+        //auth()->login($user);
+        //return redirect('/');
         return redirect()->route('login');
     }
 }

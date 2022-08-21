@@ -25,9 +25,16 @@ class RegisterStoreRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255',
-            'email' => 'required|email|max:255',
+            'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed',
-            'image' => 'required|mimes:jpeg,png,jpg,gif,svg,gif,svg|max:2048'
+            'image' => ['nullable','mimes:jpeg,png,jpg','max:2048']
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'email.unique' => "Email is already used."
         ];
     }
 }
